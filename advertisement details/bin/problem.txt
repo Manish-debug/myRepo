@@ -1,0 +1,105 @@
+Advertisement details
+ 
+[Strictly adhere to the object-oriented programming specifications given in the problem statement. Template code is provided to ease the input-output process.]
+
+Important note - Please start working on the template code which is provided. Template code will provide the base template or format in which the end solution is expected from you. Template code is not an executable code and will help you add code on top of it to ensure you make your submissions in the right format. If the submission is NOT as per the template code format the submissions will not be accepted.
+
+    Event manager wants a program to access advertisement details in the database. The program should first accept a number input and then that many advertisement details. Then store the details to the database, retrieve them and display the details along with auto generated id. Then get the id of an advertisement, find it from the database, increment the noOfAudienceAttracted field by the value of next input and update the changes to the database.
+
+
+Problem specification
+Create a class Advertisement with the following private attributes.
+
+Variable Name	Data type
+id	Integer
+advertisementMedia	String
+amountSpent	Double
+noOfAudienceAttracted	Integer
+            Include a default constructor, getters and setters for above class.
+
+Create class AdvertisementDAO with the following methods.
+
+Method name	Method Description
+public void insert(Advertisement advertisement)	This method is used to create a new advertisement record into the database
+public List<Advertisement> list()	This method is used to query the list of advertisements from the database
+public Advertisement find(int id)	This method is used to find an advertisement record using its id
+public void update(Advertisement advertisement)	This method is used to update advertisement details in the database
+Create an XML mapping file named advertisement.hbm.xml to map the persistence class - Advertisement.java to a database table.
+
+Create a hibernate configuration XML file namedhibernate.cfg.xml to configure database connection details and specify the advertisement.hbm.xml file as a mapping resource. But, do not specify connection url, username and password properties.
+
+Create a class HibernateUtil to build an instance of SessionFactory and store it in static attribute sessionFactory.
+
+Method name	Method Description
+public static SessionFactory getSessionFactory()	This method is used to return sessionFactory attribute.Use the code below to retrieve the connection details from MySQL.properties to configure connection URL, username, and password properties into hibernate.cfg.xml.
+
+            ResourceBundle rb = ResourceBundle.getBundle("mysql");
+            Configuration cfg = new Configuration();
+            cfg.configure("hibernate.cfg.xml");
+            cfg.setProperty("hibernate.connection.url", rb.getString("db.url"));
+            cfg.setProperty("hibernate.connection.username", rb.getString("db.username"));
+            cfg.setProperty("hibernate.connection.password", rb.getString("db.password"));
+ 
+mysql.properties
+Use the following code to configure the connection.
+          
+            "db.url=jdbc:mysql://localhost:3306/hiber
+             db.username=root   
+             db.password=test"
+
+Inorder to disable the log information in console,set the logger property -OFF in HibernateUtil class using the below code:
+Logger log = Logger.getLogger("org.hibernate");
+log.setLevel(Level.OFF);
+System.setProperty("org.apache.commons.logging.Log",
+"org.apache.commons.logging.impl.NoOpLog");
+
+Use the hibernate jar files from the below link. If you added any other version of hibernate jar files, your submission will not get accepted.
+e-box.co.in/uploads/hibernate_Jars.zip
+
+Database Schema Diagram:
+
+
+Sample Output Format:
+To display the advertisement details on console , use
+System.out.printf("%-5s %-20s %-15s %s\n","Id","Advertisement media","Amount spent","No Of audience attracted");
+Print "Advertisement not found!" if no advertisement found for given id.
+
+Sample Input and Output 1:
+[ Inputs are given in bold]
+Enter no. of advertisements done :
+3
+Television,500,20
+Radio,240,16
+Newspaper,200,6
+Advertisement details
+
+Id	Advertisement media	Amount spent	No Of audience attracted
+1	Television	500.0	20
+2	Radio	240.0	16
+3	Newspaper	200.0	6
+Enter advertisement id :
+2
+Enter no of new users attracted :
+3
+Advertisement details
+
+Id	Advertisement media	Amount spent	No Of audience attracted
+1	Television	500.0	20
+2	Radio	240.0	19
+3	Newspaper	200.0	6
+
+Sample Input and Output 2:
+[ Inputs are given in bold]
+Enter no. of advertisements done :
+1
+Internet,200,34
+Advertisement details
+
+Id	Advertisement media	Amount spent	No Of audience attracted
+1	Television	500.0	20
+2	Radio	240.0	19
+3	Newspaper	200.0	6
+4	Internet	200.0	34Enter advertisement id :
+5
+Advertisement not found!
+

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="Advertisement" table="advertisement">
+		<id name="id" type="java.lang.Integer">
+			<column name="id"></column>
+			<generator class="identity"></generator>
+		</id>
+		<property name="advertisementMedia" type="java.lang.String">
+			<column name="advertisementMedia" not-null="true"></column>
+		</property>
+		<property name="amountSpent" type="java.lang.Double">
+			<column name="amountSpent" not-null="true"></column>
+		</property>
+		<property name="noOfAudienceAttracted"
+			type="java.lang.Integer">
+			<column name="noOfAudienceAttracted" not-null="true"></column>
+		</property>
+
+	</class>
+</hibernate-mapping>
